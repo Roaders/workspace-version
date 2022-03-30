@@ -1,39 +1,36 @@
 import { UsageGuideConfig } from 'ts-command-line-args';
 
-export interface ICopyPartialJsonArgs {
-    sourceFile: string;
-    targetFile: string[];
-    keys: string[];
+export interface IWorkspaceVersionArgs {
+    workspacePackage: string;
     jsonIndent: number;
+    independent: boolean;
     gitAdd: boolean;
     help: boolean;
 }
 
 const defaultSource = `package.json`;
 
-export const usageGuideInfo: UsageGuideConfig<ICopyPartialJsonArgs> = {
+export const usageGuideInfo: UsageGuideConfig<IWorkspaceVersionArgs> = {
     arguments: {
-        sourceFile: {
+        workspacePackage: {
             type: String,
-            alias: 's',
-            description: `The json file to copy from. Defaults to '${defaultSource}'`,
+            alias: 'w',
+            description: `The path of the workspace package.json. Defaults to '${defaultSource}'`,
             defaultValue: defaultSource,
-            defaultOption: true,
         },
-        targetFile: { type: String, multiple: true, alias: 't', description: 'The json file to copy to' },
-        keys: {
-            type: String,
-            alias: 'k',
-            multiple: true,
-            description: `The keys to copy. For example, 'version,name,dependencies'`,
+        independent: {
+            type: Boolean,
+            alias: 'i',
+            description:
+                'turns on independent versioning of child packages. This will prevent versions of child packages from being updated',
         },
+        gitAdd: { type: Boolean, alias: 'g', description: 'adds any target files to git after updating' },
         jsonIndent: {
             type: Number,
             defaultValue: 4,
-            alias: 'i',
+            alias: 'j',
             description: 'The number of spaces to indent your json file by. Defaults to 4.',
         },
-        gitAdd: { type: Boolean, alias: 'g', description: 'adds any target files to git after updating' },
         help: { type: Boolean, alias: 'h', description: 'Show this help text' },
     },
     parseOptions: {
@@ -41,13 +38,22 @@ export const usageGuideInfo: UsageGuideConfig<ICopyPartialJsonArgs> = {
         baseCommand: 'workspace-version',
         headerContentSections: [
             {
-                header: `workspace-version`,
-                includeIn: `cli`,
-                content: `A simple script to copy portions of a json document from one file to another.
+                content: `Keeps dependency and package versions within an npm workspace in line.
+                
+By default this script will update all child package versions to match that of the workspace version and update all dependency versions that refer to sibling packages:
 
-To copy the version and dependency list from a root package.json to another packages:
+{code:bash $ workspace-version}
 
-{code.bash $ workspace-version -s package.json -t one/package.json -k version name dependencies}`,
+Alternatively you can run in {highlight independent} mode:
+
+{code:bash $ workspace-version -i}
+
+This will not update the child package versions but will still update all dependency versions to that of the sibling projects.
+
+Lastly you can also add all modified files to git:
+
+{code:bash $ workspace-version -g}
+`,
             },
         ],
     },
