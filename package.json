@@ -1,6 +1,6 @@
 {
     "name": "workspace-version",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "A script to align package versions in an npm workspace",
     "bin": {
         "workspace-version": "dist/index.js"

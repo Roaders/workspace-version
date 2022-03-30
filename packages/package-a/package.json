@@ -1,9 +1,9 @@
 {
     "name": "package-a",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "",
     "main": "index.js",
     "dependencies": {
-        "package-b": "~0.1.0"
+        "package-b": "~0.1.1"
     }
 }
