@@ -8,7 +8,7 @@ export interface IWorkspaceVersionArgs {
     help: boolean;
 }
 
-const defaultSource = `package.json`;
+export const defaultSource = `package.json`;
 
 export const usageGuideInfo: UsageGuideConfig<IWorkspaceVersionArgs> = {
     arguments: {

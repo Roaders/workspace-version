@@ -25,16 +25,22 @@
         "preverify-markdown": "npm run build",
         "write-markdown": "write-markdown -f package.json -p markdownConfig",
         "verify-markdown": "write-markdown -f package.json -p markdownConfig -v",
-        "prepublishOnly": "npm run verify-release"
+        "prepublishOnly": "npm run verify-release",
+        "preVersion": "npm build",
+        "version": "node dist -g"
     },
     "author": "Giles Roadnight",
     "license": "ISC",
     "dependencies": {
+        "chalk": "^4.1.2",
+        "message-await": "^0.3.1",
+        "rxjs": "^7.5.5",
         "ts-command-line-args": "^1.5.0"
     },
     "devDependencies": {
         "@morgan-stanley/ts-mocking-bird": "^0.2.3",
         "@types/jest": "^26.0.15",
+        "@types/node": "^16.11.26",
         "@typescript-eslint/eslint-plugin": "^5.17.0",
         "@typescript-eslint/parser": "^5.17.0",
         "concurrently": "^5.3.0",
@@ -49,7 +55,7 @@
         "prettier": "^2.6.1",
         "rimraf": "^3.0.2",
         "ts-jest": "^26.4.3",
-        "typescript": "^4.0.5"
+        "typescript": "~4.5"
     },
     "markdownConfig": {
         "markdownPath": "README.MD",
