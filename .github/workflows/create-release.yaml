@@ -21,7 +21,7 @@ jobs:
           node-version: '16.x'
 
       - name: Install node modules and verify build
-        run: npm ci && npm run build-release
+        run: npm ci && npm run verify-release
 
       - name: Release
         uses: justincy/github-action-npm-release@2.0.2

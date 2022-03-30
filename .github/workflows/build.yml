@@ -19,4 +19,4 @@ jobs:
       with:
         node-version: 16.x
     - run: npm ci
-    - run: npm run build-release
+    - run: npm run verify-release
