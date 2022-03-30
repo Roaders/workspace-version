@@ -1,0 +1,5 @@
+{
+    "name": "copy-partial-json",
+    "version": "1.1.4",
+    "description": "when npm version is run the version of this file is automatically updated"
+}

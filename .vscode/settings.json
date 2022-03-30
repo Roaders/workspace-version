@@ -1,0 +1,4 @@
+{
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "window.title": "workspace-version ${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName}"
+}
