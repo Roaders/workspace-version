@@ -67,5 +67,9 @@
     "bugs": {
         "url": "https://github.com/Roaders/workspace-version/issues"
     },
-    "homepage": "https://github.com/Roaders/workspace-version#readme"
+    "homepage": "https://github.com/Roaders/workspace-version#readme",
+    "workspaces": [
+        "packages\\package-a",
+        "packages\\package-b"
+    ]
 }
