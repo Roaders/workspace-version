@@ -31,16 +31,8 @@
         "lint:fix": "eslint . --ext .ts,.d.ts,.js --fix",
         "prepublishOnly": "npm run build-release"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/Roaders/copy-partial-json.git"
-    },
-    "author": "",
+    "author": "Giles Roadnight",
     "license": "ISC",
-    "bugs": {
-        "url": "https://github.com/Roaders/copy-partial-json/issues"
-    },
-    "homepage": "https://github.com/Roaders/copy-partial-json#readme",
     "dependencies": {
         "ts-command-line-args": "^1.5.0"
     },
@@ -67,5 +59,13 @@
         "markdownPath": "README.MD",
         "jsFile": "dist/write-markdown.constants.js",
         "verifyMessage": "'{fileName}' is out of date. Please regenerate by running 'npm run write-markdown'"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Roaders/workspace-version.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Roaders/workspace-version/issues"
+    },
+    "homepage": "https://github.com/Roaders/workspace-version#readme"
 }

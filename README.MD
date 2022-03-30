@@ -1,6 +1,6 @@
-# copy-partial-json
+# workspace-version
 
- > A simple script to copy portions of a json document from one file to another
+ > A script to align package versions in an npm workspace
 
 ![npm](https://img.shields.io/npm/v/workspace-version)
 ![NPM](https://img.shields.io/npm/l/workspace-version)
