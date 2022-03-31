@@ -1,0 +1,11 @@
+{
+    "name": "sample-workspace",
+    "version": "0.1.1",
+    "scripts": {
+        "version": "node dist -g"
+    },
+    "workspaces": [
+        "packages\\package-a",
+        "packages\\package-b"
+    ]
+}
