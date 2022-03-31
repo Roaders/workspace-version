@@ -1,3 +1,8 @@
 **/example/**/*.*
 tsconfig*.json
-sampleTarget.json
+sample-workspace/
+.github/
+.vscode/
+src/
+.eslintrc.js
+jest.config.js
