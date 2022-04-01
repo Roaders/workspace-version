@@ -6,6 +6,13 @@
 ![NPM](https://img.shields.io/npm/l/workspace-version)
 ![Typescript](https://img.shields.io/badge/types-TypeScript-blue)
 
+# Installation
+
+```bash
+$ npm install workspace-version -D
+```
+
+## Usage
 
 [//]: ####ts-command-line-args_write-markdown_replaceBelow  
 
@@ -37,9 +44,6 @@ Lastly you can also add all modified files to git:
 $ workspace-version -g  
 ```  
   
-
-
-
 ## Options
 
 | Argument | Alias | Type | Description |
