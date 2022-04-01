@@ -3,3 +3,4 @@ dist/
 *.tgz
 sampleMarkdown.md
 coverage/
+sample-workspace/package-lock.json
