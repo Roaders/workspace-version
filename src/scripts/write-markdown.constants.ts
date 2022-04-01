@@ -1,4 +1,5 @@
 import { UsageGuideConfig } from 'ts-command-line-args';
+import { defaultSource } from '../constants';
 
 export interface IWorkspaceVersionArgs {
     workspacePackage: string;
@@ -7,8 +8,6 @@ export interface IWorkspaceVersionArgs {
     gitAdd: boolean;
     help: boolean;
 }
-
-export const defaultSource = `package.json`;
 
 export const usageGuideInfo: UsageGuideConfig<IWorkspaceVersionArgs> = {
     arguments: {

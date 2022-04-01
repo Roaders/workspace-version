@@ -3,7 +3,7 @@
     "version": "0.1.4",
     "description": "A script to align package versions in an npm workspace",
     "bin": {
-        "workspace-version": "dist/index.js"
+        "workspace-version": "dist/scripts/workspace-version.js"
     },
     "keywords": [
         "version",

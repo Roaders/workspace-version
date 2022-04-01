@@ -6,8 +6,8 @@ import { Dependencies, IPackageJson } from './contracts';
 import { from, firstValueFrom } from 'rxjs';
 import { mergeMap, toArray } from 'rxjs/operators';
 import { join } from 'path';
-import { defaultSource } from './write-markdown.constants';
 import { execSync } from 'child_process';
+import { defaultSource } from './constants';
 
 const awaitReadFile = promisify(readFile);
 const awaitWriteFile = promisify(writeFile);
