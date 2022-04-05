@@ -3,7 +3,8 @@
     "version": "0.1.4",
     "description": "A script to align package versions in an npm workspace",
     "bin": {
-        "workspace-version": "dist/scripts/workspace-version.js"
+        "workspace-version": "dist/scripts/workspace-version.js",
+        "consolidate-dependencies": "dist/scripts/consolidate-dependencies.js"
     },
     "keywords": [
         "version",
@@ -52,8 +53,9 @@
     },
     "markdownConfig": {
         "markdownPath": "README.MD",
-        "jsFile": "dist/write-markdown.constants.js",
-        "verifyMessage": "'{fileName}' is out of date. Please regenerate by running 'npm run write-markdown'"
+        "jsFile": "dist/scripts/write-markdown.constants.js",
+        "verifyMessage": "'{fileName}' is out of date. Please regenerate by running 'npm run write-markdown'",
+        "configImportName": ["workspaceVersionInfo", "consolidateDependenciesInfo"]
     },
     "repository": {
         "type": "git",

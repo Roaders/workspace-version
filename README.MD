@@ -16,6 +16,7 @@ $ npm install workspace-version -D
 
 [//]: ####ts-command-line-args_write-markdown_replaceBelow  
 
+### workspace-version
 
 Keeps dependency and package versions within an npm workspace in line.  
                   
@@ -44,7 +45,10 @@ Lastly you can also add all modified files to git:
 $ workspace-version -g  
 ```  
   
-## Options
+
+
+
+#### Options
 
 | Argument | Alias | Type | Description |
 |-|-|-|-|
@@ -52,6 +56,20 @@ $ workspace-version -g
 | **independent** | **i** | boolean | turns on independent versioning of child packages. This will prevent versions of child packages from being updated |
 | **gitAdd** | **g** | boolean | adds any target files to git after updating |
 | **jsonIndent** | **j** | number | The number of spaces to indent your json file by. Defaults to 4. |
+| **help** | **h** | boolean | Show this help text |
+
+
+### consolidate-dependencies
+
+Consolidates dependency versions across all workspaces. Option to move all dev dependencies to root workspace.
+
+
+#### Options
+
+| Argument | Alias | Type | Description |
+|-|-|-|-|
+| **workspacePackage** | **w** | string | The path of the workspace package.json. Defaults to 'package.json' |
+| **migrateDevDependencies** | **m** | boolean | Moves all dev dependencies to the root workspace |
 | **help** | **h** | boolean | Show this help text |
 
 [//]: ####ts-command-line-args_write-markdown_replaceAbove  
