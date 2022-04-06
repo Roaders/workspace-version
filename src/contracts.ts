@@ -16,7 +16,7 @@ export type WorkspaceWithPath = {
     packageJson: IPackageJson;
 };
 
-export type WorkspaceDependencies = Record<string, VersionWorkspaces | undefined>;
+export type WorkspaceDependencies = Partial<Record<string, VersionWorkspaces>>;
 
 export type VersionWorkspaces = Record<string, WorkspaceDependencyType[] | undefined>;
 

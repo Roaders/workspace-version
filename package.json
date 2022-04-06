@@ -32,11 +32,13 @@
     "dependencies": {
         "chalk": "^4.1.2",
         "message-await": "^0.3.1",
+        "node-option": "^0.0.6",
         "rxjs": "^7.5.5",
         "ts-command-line-args": "^1.5.0"
     },
     "devDependencies": {
         "@types/node": "^16.11.26",
+        "@types/semver": "^7.3.9",
         "@typescript-eslint/eslint-plugin": "^5.17.0",
         "@typescript-eslint/parser": "^5.17.0",
         "concurrently": "^5.3.0",
@@ -55,7 +57,10 @@
         "markdownPath": "README.MD",
         "jsFile": "dist/scripts/write-markdown.constants.js",
         "verifyMessage": "'{fileName}' is out of date. Please regenerate by running 'npm run write-markdown'",
-        "configImportName": ["workspaceVersionInfo", "consolidateDependenciesInfo"]
+        "configImportName": [
+            "workspaceVersionInfo",
+            "consolidateDependenciesInfo"
+        ]
     },
     "repository": {
         "type": "git",

@@ -8,5 +8,8 @@
         "packages\\package-a",
         "packages\\package-b",
         "packages\\package-c"
-    ]
+    ],
+    "dependencies": {
+        "semver": "^7.3.5"
+    }
 }
