@@ -1,2 +1,2 @@
 export * from './contracts';
-export * from './workspace.helper';
+export * from './helpers';

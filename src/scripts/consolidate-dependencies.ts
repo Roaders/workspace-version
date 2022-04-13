@@ -1,13 +1,18 @@
 #!/usr/bin/env node
 
 import { parse } from 'ts-command-line-args';
-import { WorkspaceDependencies, WorkspaceDependencyType } from '..';
-import { getWorkspaceDependencies, loadAllPackages } from '../workspace.helper';
+import {
+    determineWorkspacesInstallCommands,
+    getWorkspaceDependencies,
+    installToWorkspaces,
+    loadAllPackages,
+} from '../helpers';
 import { consolidateDependenciesInfo } from './write-markdown.constants';
 import Selector from 'node-option';
 import chalk from 'chalk';
 import { from, lastValueFrom, mergeMap, toArray } from 'rxjs';
 import { compare, coerce } from 'semver';
+import { DependencyInstallInfo, WorkspaceDependencyType, WorkspaceVersion } from '../contracts';
 
 async function consolidate() {
     const { workspacePackage, migrateDevDependencies } = parse(
@@ -19,35 +24,35 @@ async function consolidate() {
 
     const allDependencies = getWorkspaceDependencies([rootPackageJson, ...childPackages]);
 
-    const installDependencies = await selectVersions(allDependencies);
+    const inScopeDependencies: DependencyVersions[] = Object.entries(allDependencies)
+        .map(([dependency, versionLookup]) => ({
+            dependency,
+            versions: Object.entries(versionLookup || {})
+                .map(([version, workspaces]) => ({ version, workspaces }))
+                .filter(filterWorkspaceVersions),
+        }))
+        .filter((dependency) => dependencyInScope(dependency, migrateDevDependencies));
 
-    console.log({ migrateDevDependencies, installDependencies });
+    const consolidatedDependencies = await selectVersions(inScopeDependencies);
+
+    const installCommands = determineWorkspacesInstallCommands(
+        consolidatedDependencies,
+        migrateDevDependencies,
+        rootPackageJson.packageJson,
+    );
+
+    installToWorkspaces(installCommands, rootPackageJson.workspacePath);
 }
 
-type DependencyInstallInfo = Record<string, WorkspaceVersion | undefined>;
+type DependencyVersions = { dependency: string; versions: WorkspaceVersion[] };
 
-type WorkspaceVersion = { version: string; workspaces: WorkspaceDependencyType[] };
-
-async function selectVersions(allDependencies: WorkspaceDependencies): Promise<DependencyInstallInfo> {
+async function selectVersions(dependencyVersions: DependencyVersions[]): Promise<DependencyInstallInfo> {
     const installInfo: DependencyInstallInfo = {};
 
-    const dependencies = Object.entries(allDependencies).map(([dependency, versionLookup]) => ({
-        dependency,
-        versions: Object.entries(versionLookup || {})
-            .map(([version, workspaces]) => ({ version, workspaces }))
-            .filter(filterWorkspaceVersions),
-    }));
-
-    dependencies
-        .filter(({ versions }) => versions.length === 1)
-        .forEach(({ dependency, versions }) => (installInfo[dependency] = versions[0]));
-
-    const multipleVersions = dependencies.filter(({ versions }) => versions.length > 1);
-
-    const selectionObservable = from(multipleVersions).pipe(
+    const selectionObservable = from(dependencyVersions).pipe(
         mergeMap(
             ({ dependency, versions }, index) =>
-                selectVersion(dependency, versions, index, multipleVersions.length).then(
+                selectVersion(dependency, versions, index, dependencyVersions.length).then(
                     (version) => (installInfo[dependency] = version),
                 ),
             1,
@@ -89,7 +94,28 @@ async function selectVersion(
         return selectVersion(dependency, workspaceVersions, index, count);
     }
 
-    return selected[0];
+    const workspaces = workspaceVersions.reduce(
+        (all, current) => [...all, ...current.workspaces],
+        new Array<WorkspaceDependencyType>(),
+    );
+
+    return { ...selected[0], workspaces };
+}
+
+function dependencyInScope(dependency: DependencyVersions, migrateDevDependencies: boolean): boolean {
+    switch (dependency.versions.length) {
+        case 0:
+            return false;
+
+        case 1:
+            return (
+                migrateDevDependencies &&
+                dependency.versions[0].workspaces.some((workspace) => workspace.type === 'dev')
+            );
+
+        default:
+            return true;
+    }
 }
 
 function sortVersions(one: WorkspaceVersion, two: WorkspaceVersion): number {

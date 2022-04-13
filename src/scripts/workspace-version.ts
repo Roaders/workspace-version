@@ -6,7 +6,7 @@ import { firstValueFrom, from, mergeMap, toArray } from 'rxjs';
 import { parse } from 'ts-command-line-args';
 import { loadAllPackages } from '..';
 import { Dependencies, IPackageJson } from '../contracts';
-import { savePackageJson, verifyUniquePackageNames } from '../workspace.helper';
+import { savePackageJson, verifyUniquePackageNames } from '../helpers';
 import { workspaceVersionInfo } from './write-markdown.constants';
 
 function workspaceVersion() {
